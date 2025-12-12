@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 7f62d90d1cc30ff4fa8de244e8fefd14
 ModelImporter:
-  serializedVersion: 22102
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
@@ -16,8 +16,11 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
+    keepScaleCurves: 0
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
+    hasGenericRootMotion: 1
+    supportRetarget: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -43,6 +46,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -97,6 +101,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
+    trimDigitTransform: 0
+    retargetBones: []
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
@@ -104,6 +110,20 @@ ModelImporter:
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
+  trackCompressionSetting:
+    serializedVersion: 3
+    compressionLevel: 2
+    translationFormat: 1
+    rotationFormat: 3
+    scaleFormat: 1
+    databaseSupport: 0
+    precision: 0.01
+    shell_distance: 3
+    constant_rotation_threshold_angle: 0.0028471446
+    constant_translation_threshold: 0.001
+    constant_scale_threshold: 0.00001
+    removeCurves: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
