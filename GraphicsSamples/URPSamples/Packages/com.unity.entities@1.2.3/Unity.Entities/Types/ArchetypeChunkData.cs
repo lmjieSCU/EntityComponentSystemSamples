@@ -1,3 +1,48 @@
+/*************************************************************
+ * 记录了一些例如change version numbers, shared component indices, and entity count的关于chunk的元数据
+ * 一个archeType对应着一个archeTypeChunkData
+ * 所有的数据以SOA形式存储,通过指针偏移的方式访问
+ * 之所以不将这些元数据放置在chunk中是为了在非chunk层面对chunk进行遍历预检查,提高cache命中率,避免在多个chunk中频繁跳转
+ * ECS的思想就是批量处理而非关心某个指定的chunk！！！
+┌─────────────────────────────────────────────────────────────┐
+│ ChunkIndices[Capacity]                                      │ ← 0字节偏移
+│   [chunk0][chunk1][chunk2]...                              │
+├─────────────────────────────────────────────────────────────┤
+│ ChangeVersions[ComponentCount × Capacity]                  │ ← ChunkIndicesSize后
+│   Type0: [chunk0_ver][chunk1_ver][chunk2_ver]...           │
+│   Type1: [chunk0_ver][chunk1_ver][chunk2_ver]...           │
+│   ...                                                       │
+├─────────────────────────────────────────────────────────────┤
+│ EntityCount[Capacity]                                       │ ← ChangeVersionSize后
+│   [chunk0_count][chunk1_count][chunk2_count]...             │
+├─────────────────────────────────────────────────────────────┤
+│ SharedComponentValues[SharedComponentCount × Capacity]      │ ← EntityCountSize后(是下标)
+│   SharedComp0: [chunk0_val][chunk1_val][chunk2_val]...      │
+│   SharedComp1: [chunk0_val][chunk1_val][chunk2_val]...      │
+│   ...                                                       │
+├─────────────────────────────────────────────────────────────┤
+│ Padding (0-15 bytes)                                        │ ← 确保16字节对齐
+├─────────────────────────────────────────────────────────────┤
+│ ComponentEnabledBits[Capacity × ComponentCount]            │ ← 对齐后
+│   Chunk0: [Type0_v128][Type1_v128][Type2_v128]...          │
+│   Chunk1: [Type0_v128][Type1_v128][Type2_v128]...          │
+│   ...                                                       │
+├─────────────────────────────────────────────────────────────┤
+│ ComponentEnabledBitsHierarchicalData[Capacity × ComponentCount]│
+│   Chunk0: [Type0_DisabledCount][Type1_DisabledCount]...     │
+│   Chunk1: [Type0_DisabledCount][Type1_DisabledCount]...     │
+│   ...                                                       │
+└─────────────────────────────────────────────────────────────┘
+ *
+ *
+ *
+ *
+ *
+ *
+ * 
+ */
+
+
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Unity.Assertions;
